@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head><title>微博/小红书无水印下载</title></head>
+<body>
+<h2>工具6：微博/小红书无水印视频下载</h2>
+<form id="form">
+    <input type="text" id="url" placeholder="粘贴视频链接" style="width:500px"><br><br>
+    <button type="submit">开始下载</button>
+</form>
+<div id="result"></div>
+
+<script>
+document.getElementById('form').onsubmit = async (e) => {
+    e.preventDefault();
+    let url = document.getElementById('url').value;
+    let res = await fetch('/api/download', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: new URLSearchParams({'url': url})
+    });
+    let data = await res.json();
+    if(data.success) {
+        document.getElementById('result').innerHTML = `<h3>${data.title}</h3>
+        <video src="/${data.file}" controls style="max-width:100%"></video><br>
+        <a href="/${data.file}" download>点击下载</a>`;
+    } else {
+        alert('失败：' + data.error);
+    }
+};
+</script>
+</body>
+</html>
