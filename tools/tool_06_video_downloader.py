@@ -37,11 +37,11 @@ async def download_video(url: str = Form(...)):
             info = ydl.extract_info(url, download=True)
             filename = ydl.prepare_filename(info)
             title = info.get('title', '未知视频')
-        rel_path = os.path.relpath(filename, ".")
+        rel_path = os.path.relpath(filename, DOWNLOAD_DIR)
         rel_path_fixed = rel_path.replace('\\', '/')
         return JSONResponse({
             "success": True,
-            "file": f"/{rel_path_fixed}",
+            "file": f"/downloads/{rel_path_fixed}",
             "title": title
         })
     except Exception as e:
