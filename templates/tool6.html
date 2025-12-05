@@ -19,12 +19,17 @@ document.getElementById('form').onsubmit = async (e) => {
         body: new URLSearchParams({'url': url})
     });
     let data = await res.json();
+    let resultDiv = document.getElementById('result');
     if(data.success) {
-        document.getElementById('result').innerHTML = `<h3>${data.title}</h3>
-        <video src="/${data.file}" controls style="max-width:100%"></video><br>
-        <a href="/${data.file}" download>点击下载</a>`;
+        resultDiv.innerHTML = `<h3>${data.title}</h3>
+        <video src="${data.file}" controls style="max-width:100%; height:auto;" preload="metadata" onerror="console.error('Video load failed:', this.src); this.nextElementSibling.style.display='block';">
+            您的浏览器不支持视频播放。请直接下载。
+        </video>
+        <p style="color:red; display:none;">视频加载失败（网络/格式问题），请点击下载。</p>
+        <a href="${data.file}" download="${data.title}.mp4" style="display:block; margin-top:10px;">点击下载 MP4</a>`;
+        console.log('Video src:', data.file);  // 调试：浏览器 F12 检查路径
     } else {
-        alert('失败：' + data.error);
+        resultDiv.innerHTML = `<p style="color:red;">失败：${data.error}</p>`;
     }
 };
 </script>
