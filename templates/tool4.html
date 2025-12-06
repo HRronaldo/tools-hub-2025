@@ -1,46 +1,129 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>工具4：Markdown → 微信公众号完美排版</title>
+    <meta charset="utf-8">
+    <title>工具4：Markdown → 微信公众号完美排版（免费无限制）</title>
     <style>
-        body { font-family: Arial; margin: 20px; background: #f4f4f4; }
-        .container { display: flex; gap: 20px; max-width: 1400px; margin: 0 auto; }
-        textarea { width: 100%; height: 80vh; font-family: Consolas; font-size: 16px; }
-        .preview { width: 100%; height: 80vh; border: 1px solid #ddd; background: white; }
-        button { padding: 12px 24px; font-size: 18px; margin: 10px 0; }
-        .tips { color: #666; font-size: 14px; }
+        body {font-family:Arial,Helvetica,sans-serif;margin:0;padding:20px;background:#f5f7fa;}
+        h1 {text-align:center;color:#222;margin-bottom:30px;}
+        .container {display:flex;gap:25px;max-width:1800px;margin:0 auto;}
+        .editor, .preview-box {width:50%;display:flex;flex-direction:column;}
+        textarea {width:100%;height:80vh;font-family:Consolas,Menlo,Monaco,monospace;font-size:16px;padding:15px;
+                 border:1px solid #ddd;border-radius:8px;background:#fff;resize:none;box-sizing:border-box;}
+        iframe {width:100%;height:80vh;border:1px solid #ddd;border-radius:8px;background:white;box-shadow:0 4px 12px rgba(0,0,0,0.1);}
+        button {margin:15px 0;padding:16px 40px;background:#0066ff;color:white;border:none;border-radius:8px;
+                font-size:18px;cursor:pointer;align-self:flex-start;}
+        button:hover {background:#0055cc;}
+        .tips {background:#fff;padding:20px;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,0.1);font-size:15px;line-height:1.8;}
+        .highlight {color:#d00;font-weight:bold;}
+        .footer {text-align:center;margin-top:30px;color:#666;font-size:14px;}
     </style>
 </head>
 <body>
-<h1>工具4：Markdown → 微信公众号完美排版（免费无限制）</h1>
+<h1>Markdown → 微信公众号完美排版（免费 · 无限制 · 比 mdnice 更好用）</h1>
+
 <div class="container">
-    <div>
-        <textarea id="md" placeholder="在此粘贴 Markdown 内容，支持表格、代码块、公式、图片链接...">{{ "```python\nprint('Hello 微信公众号')\n```" }}</textarea>
-        <button onclick="convert()">一键转换 → 复制到公众号</button>
-        <p class="tips">支持：表格、代码高亮、图片、公式、标题、引用、列表</p>
+    <!-- 左侧编辑区 -->
+    <div class="editor">
+        <textarea id="md" placeholder="在此粘贴你的 Markdown 内容，支持表格、代码高亮、LaTeX 公式、脚注等..."></textarea>
+        <button onclick="convert()">转换为微信排版</button>
     </div>
-    <iframe id="preview" class="preview"></iframe>
+
+    <!-- 右侧预览区 -->
+    <div class="preview-box">
+        <iframe id="preview"></iframe>
+    </div>
+</div>
+
+<div class="footer">
+    Tools Hub 2025 · 完全免费 · 永久开源 · GitHub 开源地址
 </div>
 
 <script>
+// 初始化默认 Markdown 内容
+document.getElementById('md').value = `# Markdown + 公式 + 脚注终极测试
+
+## 一、行内代码示例
+我们可以在文中使用行内代码，比如 \`const x = 10;\` 或 \`print("Hello")\` 来展示代码片段。
+
+## 二、行内公式
+质能方程：$E=mc^2$，速度之和：$v_1 + v_2$。
+
+## 三、块级公式（居中大字）
+$$
+E = mc^2
+$$
+
+$$
+\\int_0^\\infty e^{-x^2} dx = \\frac{\\sqrt{\\pi}}{2}
+$$
+
+## 四、代码块示例（Python）
+\`\`\`python
+def passive_income():
+    build_tools()
+    deploy_to_nas()
+    open_adsense()
+    sleep_forever()
+    print("躺赚成功！")
+\`\`\`
+
+## 五、代码块示例（JavaScript）
+\`\`\`javascript
 async function convert() {
-    const md = document.getElementById('md').value;
+    const md = document.getElementById('md').value || '';
     const res = await fetch('/api/md2wechat', {
         method: 'POST',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: new URLSearchParams({'md_text': md})
     });
     const data = await res.json();
-    if(data.success) {
+    console.log(data);
+}
+\`\`\`
+
+## 六、表格测试
+
+| 平台 | 日活 | 适合内容 |
+|------|------|---------|
+| 微信公众号 | 12亿 | 长文/干货 |
+| 小红书 | 2.6亿 | 图文/种草 |
+| 知乎 | 1亿 | 问答/深度 |
+
+## 七、脚注测试
+这是正文内容，需要解释某个概念[^1]。
+另一种引用方式[^2]，放在句子中间。
+
+[^1]: 这是第一个脚注的内容，会在文章末尾显示。
+[^2]: 这是第二个脚注，可以包含更多信息。`;
+
+async function convert() {
+    const md = document.getElementById('md').value || '';
+    const res = await fetch('/api/md2wechat', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: new URLSearchParams({'md_text': md})
+    });
+    const data = await res.json();
+
+    if (data.success) {
         const doc = document.getElementById('preview').contentWindow.document;
-        doc.open(); doc.write(data.html); doc.close();
-        alert('转换完成！在新窗口右键 → 复制全部 → 粘贴到微信公众号编辑器即可完美排版');
+        doc.open();
+        doc.write(data.html);
+        doc.close();
+
+        alert("转换成功！\n\n请按以下操作复制：\n\n" +
+            "1. 在右侧预览区域右键\n" +
+            "2. 选择 【查看页面源代码】\n" +
+            "3. 全选（Ctrl+A） → 复制（Ctrl+C）\n" +
+            "4. 粘贴到微信公众号编辑器即可完美还原！");
     } else {
-        alert('转换失败：' + data.error);
+        alert("转换失败：" + data.error);
     }
 }
-// 默认示例
-convert();
+
+// 页面加载自动预览默认内容
+window.onload = convert;
 </script>
 </body>
 </html>

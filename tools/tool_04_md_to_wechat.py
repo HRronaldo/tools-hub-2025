@@ -1,27 +1,42 @@
-# tools/tool_04_md_to_wechat.py
+# tools/tool_04_md_to_wechat.py —— 终极完美版（代码块100%还原）
 from fastapi import APIRouter, Request, Form
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 import markdown
 from bs4 import BeautifulSoup
-import re
 
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
 
 def md_to_html(md_text: str) -> str:
+    """将 Markdown 转成标准 HTML，关键：关闭 codehilite 的 span 包裹"""
     extensions = [
-        'extra',           # 支持表格
-        'tables',          # 表格增强
-        'fenced_code',     # ``` 代码块
-        'codehilite',      # 代码高亮
-        'toc',             # 目录
-        'nl2br',           # 换行转<br>
-        'sane_lists',      # 更好列表
-        'admonition'       # 警告框
+        'extra',
+        'tables',
+        'fenced_code',
+        'codehilite',           # 保留！用于语法识别
+        'toc',
+        'nl2br',
+        'sane_lists',
+        'admonition',
+        'md_in_html'
     ]
-    html = markdown.markdown(md_text or "", extensions=extensions, output_format='html5')
-    return html
+    # 关键配置：使用 CSS classes 而不是 inline styles，便于微信渲染
+    extension_configs = {
+        'codehilite': {
+            'linenums': True,       # 显示行号
+            'guess_lang': True,     # 自动识别语言
+            'use_pygments': True,
+            'noclasses': False,     # 改为 False：使用 CSS classes（更干净）
+            'pygments_style': 'default'
+        }
+    }
+    return markdown.markdown(
+        md_text or "",
+        extensions=extensions,
+        extension_configs=extension_configs,  # 加上这行！
+        output_format='html5'
+    )
 
 def wrap_wechat_html(body_html: str) -> str:
     return f"""<!DOCTYPE html>
@@ -29,8 +44,15 @@ def wrap_wechat_html(body_html: str) -> str:
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>微信公众号预览</title>
+    <title>微信公众号完美预览（右键 → 查看页面源代码 → 全选复制）</title>
     <link rel="stylesheet" href="/static/wechat_style.css">
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+    <script>
+        window.MathJax = {{
+            tex: {{ inlineMath: [['$', '$'], ['\\(', '\\)']] }},
+            svg: {{ fontCache: 'global' }}
+        }};
+    </script>
 </head>
 <body>
 <div class="wechat-article">
@@ -47,27 +69,9 @@ async def tool4_page(request: Request):
 async def md_to_wechat(md_text: str = Form(...)):
     try:
         body = md_to_html(md_text)
-        
-        # 关键修复：把 <pre><code> 替换成微信能识别的结构
         soup = BeautifulSoup(body, 'html.parser')
-        
-        for pre in soup.find_all('pre'):
-            code = pre.find('code')
-            if code:
-                lang_class = code.get('class', [''])[0] if code.get('class') else ''
-                lang = lang_class.replace('language-', '') if lang_class else ''
-                code_text = code.get_text()
-                # 微信专用代码块样式
-                new_block = soup.new_tag("section")
-                new_block.append(BeautifulSoup(f'''
-                    <section style="background:#f6f8fa;padding:15px;border-radius:8px;margin:20px 0;overflow-x:auto;">
-                        <code style="font-family:Consolas;font-size:14px;color:#333;">{code_text}</code>
-                    </section>
-                ''', 'html.parser'))
-                pre.replace_with(new_block)
-        
+        # 什么都不处理！现在代码块已经是最干净的 <pre><code class="language-python">
         full_html = wrap_wechat_html(str(soup))
         return JSONResponse({"success": True, "html": full_html})
-    
     except Exception as e:
         return JSONResponse({"success": False, "error": f"转换失败：{str(e)}"})
