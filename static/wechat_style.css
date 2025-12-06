@@ -1,0 +1,23 @@
+/* static/wechat_style.css */
+.wechat-article { max-width: 100%; margin: 0 auto; padding: 20px; background: white; line-height: 1.8; font-size: 16px; color: #333; }
+.wechat-article h1 { font-size: 24px; font-weight: bold; text-align: center; margin: 30px 0; }
+.wechat-article h2 { font-size: 20px; font-weight: bold; margin: 25px 0 15px; border-left: 4px solid #0066cc; padding-left: 10px; }
+.wechat-article h3 { font-size: 18px; font-weight: bold; margin: 20px 0 10px; }
+.wechat-article p { margin: 15px 0; }
+.wechat-article img { max-width: 100%; height: auto; display: block; margin: 20px auto; border-radius: 8px; }
+.wechat-article blockquote { border-left: 4px solid #ddd; padding-left: 15px; color: #666; margin: 20px 0; background: #f9f9f9; padding: 15px; border-radius: 8px; }
+.wechat-article table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+.wechat-article table th, .wechat-article table td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+.wechat-article table th { background: #f0f0f0; }
+.wechat-article ul, .wechat-article ol { padding-left: 30px; margin: 15px 0; }
+.wechat-article hr { border: none; border-top: 2px dashed #ddd; margin: 40px 0; }
+/* 行内代码样式 */
+.wechat-article code { background: #f0f0f0; padding: 2px 6px; border-radius: 4px; font-family: Consolas, Menlo, Monaco, monospace; font-size: 14px; color: #d63384; }
+/* 代码块样式 */
+.wechat-article pre { background: #f6f8fa; padding: 15px; border-radius: 8px; overflow-x: auto; margin: 20px 0; border-left: 4px solid #0066cc; }
+.wechat-article pre code { background: none; padding: 0; color: #333; border-radius: 0; font-family: Consolas, Menlo, Monaco, monospace; font-size: 14px; }
+/* Pygments 行号样式 */
+.wechat-article .linenos { display: inline-block; padding-right: 10px; user-select: none; color: #999; border-right: 1px solid #ddd; margin-right: 10px; }
+.wechat-article .lineno { line-height: 1.5; font-size: 14px; }
+.code-block { background: #f6f8fa; padding: 15px; border-radius: 8px; overflow-x: auto; margin: 20px 0; }
+.code-block code { font-family: Consolas, Menlo, Monaco, monospace; font-size: 14px; white-space: pre; }
