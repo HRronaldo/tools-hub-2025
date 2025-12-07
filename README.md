@@ -18,4 +18,14 @@
 
 > 2025 年，真正的被动收入 = 造一个别人抢着用的免费工具，然后睡觉
 
+欢迎 Star + 分享 + 打赏一杯咖啡😊
+
+<div align="center">
+
+| 微信支付 | 支付宝 |
+|---------|---------|
+| <img src="pic_demo/wx.png" alt="微信支付" width="200" /> | <img src="pic_demo/zfb.png" alt="支付宝" width="200" /> |
+
+</div>
+
 ---
