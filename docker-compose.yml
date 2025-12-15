@@ -1,0 +1,23 @@
+version: '3.8'
+
+networks:
+  1panel-network:
+    external: true  # 接入 1Panel 已创建的外部网络
+
+services:
+  toolhub:
+    image: python:3.10-slim
+    container_name: toolhub2025
+    working_dir: /app
+    volumes:
+      - .:/app  # 挂载当前目录（代码热更新）
+    ports:
+      - "14567:14567"  # 主机:容器端口
+    command: >
+      sh -c "pip install -r requirements.txt &&
+             uvicorn main:app --host 0.0.0.0 --port 14567"
+    networks:
+      - 1panel-network
+    restart: always  # 开机自启
+    environment:
+      - TZ=Asia/Shanghai  # 时区，可选
