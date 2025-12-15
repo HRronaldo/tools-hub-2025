@@ -37,7 +37,7 @@ nssm start ToolHub >nul 2>&1
 echo.
 echo ========================================
 echo ToolHub service started and set to auto-start
-echo Access: http://YOUR_NAS_IP:8000
+echo Access: http://YOUR_NAS_IP:14567
 echo Stop:   nssm stop ToolHub
 echo Remove: nssm remove ToolHub confirm
 echo ========================================

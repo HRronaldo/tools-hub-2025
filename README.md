@@ -4,8 +4,8 @@
 
 | 工具 | 功能 | 状态 | 立即使用 | 详细教程 |
 |------|------|------|----------|----------|
-| 4 | Markdown → 微信公众号完美排版（秒杀 mdnice） | 公式/代码/脚注全完美 | [点我 →](http://127.0.0.1:8000/tool/4) | [RTFM →](./RTFM/tool-04-markdown-wechat/) |
-| 6 | 小红书 & 微博无水印视频下载 | 100% 跑通 | [点我 →](http://127.0.0.1:8000/tool/6) | [RTFM →](./RTFM/tool-06-video-downloader/) |
+| 4 | Markdown → 微信公众号完美排版（秒杀 mdnice） | 公式/代码/脚注全完美 | [点我 →](http://127.0.0.1:14567/tool/4) | [RTFM →](./RTFM/tool-04-markdown-wechat/) |
+| 6 | 小红书 & 微博无水印视频下载 | 100% 跑通 | [点我 →](http://127.0.0.1:14567/tool/6) | [RTFM →](./RTFM/tool-06-video-downloader/) |
 
 
 ### RTFM（Read The Fucking Manual）- 极简图文教程区
