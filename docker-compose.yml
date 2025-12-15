@@ -12,12 +12,12 @@ services:
     volumes:
       - .:/app  # 挂载当前目录（代码热更新）
     ports:
-      - "14567:14567"  # 主机:容器端口
-    command: >
-      sh -c "pip install -r requirements.txt &&
-             uvicorn main:app --host 0.0.0.0 --port 14567"
+       - "14567:14567"  # 主机:容器端口
     networks:
       - 1panel-network
-    restart: always  # 开机自启
+    restart: always
     environment:
       - TZ=Asia/Shanghai  # 时区，可选
+    command: >
+      sh -c "pip install -r requirements.txt &&
+             exec uvicorn main:app --host 0.0.0.0 --port 14567"
