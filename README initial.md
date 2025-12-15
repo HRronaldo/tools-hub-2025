@@ -14,12 +14,12 @@
 
 2. 以后每次启动：
    直接双击 run.bat
-   浏览器打开 http://localhost:8000
+   浏览器打开 http://localhost:14567
 
 ## NAS 永久运行（生产环境）
 1. 把整个文件夹复制到 NAS 的 D:\program\tool-hub-2025
 2. 只需双击一次 nas-run.bat（自动注册为 Windows 开机自启服务）
-3. 以后访问 http://NAS内网IP:8000 即可
+3. 以后访问 http://NAS内网IP:14567 即可
 
 ## 工具清单（按开发难度+流量排序）
 1. WSL Docker 代理一键修复（30秒解决 pull 卡死）
