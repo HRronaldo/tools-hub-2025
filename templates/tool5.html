@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}工具5：PDF → Markdown 完美转换{% endblock %}
+
+{% block header %}工具5：PDF → Markdown 完美转换（保留公式 + 表格）{% endblock %}
+
+{% block content %}
+<style>
+    .upload-area { text-align: center; padding: 40px; border: 2px dashed #0066ff; border-radius: 16px; background: #f0f8ff; margin: 20px 0; }
+    input[type="file"] { margin: 20px 0; }
+    button { padding: 16px 40px; background: #0066ff; color: white; border: none; border-radius: 12px; font-size: 18px; cursor: pointer; }
+    button:hover { background: #0055cc; }
+    textarea { width: 100%; height: 60vh; font-family: Consolas, monospace; font-size: 16px; padding: 15px; border: 1px solid #ddd; border-radius: 8px; margin-top: 30px; }
+</style>
+
+<div class="upload-area">
+    <h2>上传 PDF 文件，一键转换为 Markdown</h2>
+    <p>支持保留 LaTeX 公式、表格结构、图片描述</p>
+    <form action="/api/pdf2md" method="post" enctype="multipart/form-data" id="upload-form">
+        <input type="file" name="pdf_file" accept=".pdf" required>
+        <button type="submit">开始转换</button>
+    </form>
+</div>
+
+<textarea id="result" placeholder="转换结果将显示在这里..." readonly></textarea>
+
+<script>
+document.getElementById('upload-form').onsubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const res = await fetch('/api/pdf2md', {
+        method: 'POST',
+        body: formData
+    });
+    const data = await res.json();
+    if (data.success) {
+        document.getElementById('result').value = data.markdown;
+        alert("转换成功！已显示在下方，可全选复制");
+    } else {
+        alert("转换失败：" + data.error);
+    }
+};
+</script>
+{% endblock %}

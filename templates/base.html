@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Tools Hub 2025{% endblock %}</title>
+    <meta name="google-site-verification" content="你的真实 Adsense 验证代码" />
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f8f9fc; color: #333; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 40px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #222; margin-bottom: 40px; font-size: 32px; }
+        .back-link { text-align: center; margin-bottom: 30px; font-size: 18px; }
+        .back-link a { color: #0066ff; text-decoration: none; }
+        .back-link a:hover { text-decoration: underline; }
+        .footer { text-align: center; margin-top: 80px; color: #888; font-size: 14px; }
+        .footer a { color: #666; margin: 0 10px; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link"><a href="/">← 返回首页</a></div>
+        <h1>{% block header %}Tools Hub 2025{% endblock %}</h1>
+        {% block content %}{% endblock %}
+        <div class="footer">
+            <p>全站免费 · 永久开源 · 欢迎分享</p>
+            <p>
+                <a href="https://github.com/HRronaldo/tools-hub-2025" target="_blank">GitHub 开源地址</a> · 
+                <a href="/privacy">隐私政策</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
