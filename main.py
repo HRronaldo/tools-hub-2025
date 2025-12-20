@@ -18,11 +18,13 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
 # === 注册所有工具路由 ===
-from tools.tool_06_video_downloader import router as tool6_router
 from tools.tool_04_md_to_wechat import router as tool4_router
+from tools.tool_05_pdf_to_md import router as tool5_router
+from tools.tool_06_video_downloader import router as tool6_router
 
-app.include_router(tool6_router)
 app.include_router(tool4_router)
+app.include_router(tool5_router)
+app.include_router(tool6_router)
 
 # === 首页 ===
 @app.get("/", response_class=HTMLResponse)
