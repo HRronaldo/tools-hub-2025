@@ -1,49 +1,36 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>工具6：小红书/微博无水印视频下载（免费 · 永久有效）</title>
-    <style>
-        body {font-family:Arial,Helvetica,sans-serif;margin:0;padding:20px;background:#f8f9fc;color:#333;}
-        h1 {text-align:center;color:#222;margin:20px 0 40px;font-size:28px;}
-        .container {max-width:1000px;margin:0 auto;background:white;padding:30px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,0.1);}
-        .input-area {display:flex;gap:15px;margin-bottom:30px;align-items:center;}
-        input {flex:1;padding:16px 20px;font-size:16px;border:2px solid #e1e5e9;border-radius:12px;outline:none;transition:all 0.3s;}
-        input:focus {border-color:#0066ff;box-shadow:0 0 0 4px rgba(0,102,255,0.1);}
-        button {padding:16px 40px;background:#0066ff;color:white;border:none;border-radius:12px;font-size:18px;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 15px rgba(0,102,255,0.3);}
-        button:hover {background:#0055cc;transform:translateY(-2px);}
-        button:active {transform:translateY(0);}
-        .video-container {text-align:center;margin:30px 0;background:#000;border-radius:16px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.2);}
-        video {max-width:100%;max-height:70vh;border-radius:16px;}
-        .download-btn {display:inline-block;margin:20px auto;padding:14px 36px;background:#00c853;color:white;border-radius:50px;font-size:18px;text-decoration:none;box-shadow:0 6px 20px rgba(0,200,83,0.4);transition:all 0.3s;}
-        .download-btn:hover {background:#00b140;transform:translateY(-3px);}
-        .tips {background:#f0f8ff;padding:20px;border-radius:12px;border-left:5px solid #0066ff;font-size:15px;color:#555;margin-top:30px;}
-        .footer {text-align:center;margin-top:50px;color:#888;font-size:14px;}
-    </style>
-</head>
-<body>
-<h1>小红书 & 微博无水印视频下载神器（2025最新·永久有效）</h1>
+{% extends "base.html" %}
 
-<div class="container">
-    <div class="input-area">
-        <input type="text" id="url" placeholder="粘贴小红书或微博视频链接（支持含 xsec_token 的分享链接）" value="">
-        <button onclick="download()">开始下载</button>
-    </div>
+{% block title %}工具6：小红书/微博无水印视频下载{% endblock %}
 
-    <div id="result"></div>
+{% block header %}小红书 & 微博无水印视频下载神器（2025最新·永久有效）{% endblock %}
 
-    <div class="tips">
-        <strong>使用提示：</strong><br>
-        • 支持小红书所有视频（包括私密分享链接）<br>
-        • 支持微博公开视频（登录态更稳）<br>
-        • 下载后自动播放 + 一键保存原画质 MP4<br>
-        • 完全免费，无限次使用，永不失效
-    </div>
+{% block content %}
+<style>
+    .input-area { display: flex; gap: 15px; margin-bottom: 30px; align-items: center; }
+    input { flex: 1; padding: 16px 20px; font-size: 16px; border: 2px solid #e1e5e9; border-radius: 12px; outline: none; transition: all 0.3s; }
+    input:focus { border-color: #0066ff; box-shadow: 0 0 0 4px rgba(0,102,255,0.1); }
+    button { padding: 16px 40px; background: #0066ff; color: white; border: none; border-radius: 12px; font-size: 18px; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 15px rgba(0,102,255,0.3); }
+    button:hover { background: #0055cc; transform: translateY(-2px); }
+    .video-container { text-align: center; margin: 30px 0; background: #000; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+    video { max-width: 100%; max-height: 70vh; border-radius: 16px; }
+    .download-btn { display: inline-block; margin: 20px auto; padding: 14px 36px; background: #00c853; color: white; border-radius: 50px; font-size: 18px; text-decoration: none; box-shadow: 0 6px 20px rgba(0,200,83,0.4); transition: all 0.3s; }
+    .download-btn:hover { background: #00b140; transform: translateY(-3px); }
+    .tips { background: #f0f8ff; padding: 20px; border-radius: 12px; border-left: 5px solid #0066ff; font-size: 15px; color: #555; margin-top: 30px; }
+</style>
+
+<div class="input-area">
+    <input type="text" id="url" placeholder="粘贴小红书或微博视频链接（支持含 xsec_token 的分享链接）" value="">
+    <button onclick="download()">开始下载</button>
 </div>
 
-<div class="footer">
-    Tools Hub 2025 · 完全免费 · 永久开源 · 
-    <a href="https://github.com/HRronaldo/tools-hub-2025" target="_blank">GitHub 开源地址</a>
+<div id="result"></div>
+
+<div class="tips">
+    <strong>使用提示：</strong><br>
+    • 支持小红书所有视频（包括私密分享链接）<br>
+    • 支持微博公开视频（登录态更稳）<br>
+    • 下载后自动播放 + 一键保存原画质 MP4<br>
+    • 完全免费，无限次使用，永不失效
 </div>
 
 <script>
@@ -81,5 +68,4 @@ async function download() {
     }
 }
 </script>
-</body>
-</html>
+{% endblock %}
