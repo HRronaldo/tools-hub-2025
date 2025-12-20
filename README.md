@@ -1,43 +1,31 @@
-# Tools-Hub-2025
+# Tools Hub 2025 - 程序员躺赚神器合集（全部免费 · 永久开源）
 
-13 个程序员自用 AI 小工具 → 完全免费 → Adsense + Affiliate 躺赚  
-作者：HRronaldo（CS 老鸟，9 年 AI 预判者，14h 上班狗）
+已上线两大爆款工具（2025年最新反反爬技术），可直接躺赚
 
-## 项目统一路径（主力 PC 与 NAS 完全相同）
-`D:\program\tool-hub-2025`
+| 工具 | 功能 | 状态 | 立即使用 | 详细教程 |
+|------|------|------|----------|----------|
+| 4 | Markdown → 微信公众号完美排版（秒杀 mdnice） | 公式/代码/脚注全完美 | [点我 →](http://127.0.0.1:14567/tool/4) | [RTFM →](./RTFM/tool-04-markdown-wechat/) |
+| 6 | 小红书 & 微博无水印视频下载 | 100% 跑通 | [点我 →](http://127.0.0.1:14567/tool/6) | [RTFM →](./RTFM/tool-06-video-downloader/) |
 
-## 主力 PC 快速启动（开发/测试）
-1. 只需执行一次：
-   ```shell
-   conda env create -f environment.yml
-   ```
 
-2. 以后每次启动：
-   直接双击 run.bat
-   浏览器打开 http://localhost:8000
+### RTFM（Read The Fucking Manual）- 极简图文教程区
+程序员的终极浪漫：只看图，不说话，30秒学会
 
-## NAS 永久运行（生产环境）
-1. 把整个文件夹复制到 NAS 的 D:\program\tool-hub-2025
-2. 只需双击一次 nas-run.bat（自动注册为 Windows 开机自启服务）
-3. 以后访问 http://NAS内网IP:8000 即可
+更多神器开发中（共13个）：PDF转Markdown、B站字幕提取、图片去背景...全部免费
 
-## 工具清单（按开发难度+流量排序）
-1. WSL Docker 代理一键修复（30秒解决 pull 卡死）
-2. 1Panel 应用商店同步 + DNS 自动修复
-3. ZeroTier → Tailscale 一键迁移脚本
-4. Markdown → 微信公众号完美排版
-5. PDF 转 Markdown（保留公式）
-6. 微博/小红书无水印视频下载
-7. 一键生成 Claude/Gemini 共享链接
-8. B站视频字幕提取+翻译
-9. 抖音/快手直播实时转文字
-10. 全局 AI 划词翻译（浏览器插件）
-11. 简历一键美化（LaTeX→PDF）
-12. 微信聊天记录导出 HTML
-13. 图片背景一键去除（Remove.bg 免费替代）
+**开源地址**：https://github.com/HRronaldo/tools-hub-2025  
+**作者**：一个想躺赚的程序员（已成功 2/13）
 
-## 变现方式
-- Google Adsense（已预留广告位）
-- Affiliate（Claude、Gemini、Docker Pro 等 20-50% 佣金）
+> 2025 年，真正的被动收入 = 造一个别人抢着用的免费工具，然后睡觉
 
-License: MIT
+欢迎 Star + 分享 + 打赏一杯咖啡😊
+
+<div align="center">
+
+| 微信支付 | 支付宝 |
+|---------|---------|
+| <img src="pic_demo/wx.png" alt="微信支付" width="200" /> | <img src="pic_demo/zfb.png" alt="支付宝" width="200" /> |
+
+</div>
+
+---

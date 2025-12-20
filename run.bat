@@ -13,5 +13,5 @@ if %errorlevel% neq 0 (
     exit /b 1
 )
 
-uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+uvicorn main:app --host 0.0.0.0 --port 14567 --reload
 pause
