@@ -29,5 +29,10 @@ app.include_router(tool4_router)
 async def home(request: Request):
     return templates.get_template("index.html").render({"request": request})
 
+# == 隐私政策页面 ===
+@app.get("/privacy", response_class=HTMLResponse)
+async def privacy(request: Request):
+    return templates.get_template("privacy.html").render({"request": request})
+
 # 注意：这里故意留空！启动完全交给 run.bat
 # if __name__ == "__main__":  ← 永远不写这句！
