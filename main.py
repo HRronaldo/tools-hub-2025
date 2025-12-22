@@ -22,11 +22,13 @@ from tools.tool_04_md_to_wechat import router as tool4_router
 from tools.tool_05_pdf_to_md import router as tool5_router
 from tools.tool_06_video_downloader import router as tool6_router
 from tools.tool_07_bilibili import router as tool7_router
+from tools.tool_08_remove_bg import router as tool8_router
 
 app.include_router(tool4_router)
 app.include_router(tool5_router)
 app.include_router(tool6_router)
 app.include_router(tool7_router)
+app.include_router(tool8_router)
 
 # === 首页 ===
 @app.get("/", response_class=HTMLResponse)
