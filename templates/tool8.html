@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block title %}工具8：图片背景一键去除（Remove.bg 免费替代）{% endblock %}
+
+{% block header %}图片背景一键去除（免费无限制 · 原图质量 · 支持PNG/JPG/WEBP）{% endblock %}
+
+{% block content %}
+<style>
+    .upload-area {
+        text-align: center;
+        padding: 60px;
+        border: 3px dashed #0066ff;
+        border-radius: 20px;
+        background: #f0f8ff;
+        margin: 40px 0;
+        transition: all 0.3s;
+    }
+    .upload-area:hover {
+        border-color: #0055cc;
+        background: #e6f3ff;
+    }
+    input[type="file"] {
+        margin: 20px 0;
+        font-size: 16px;
+    }
+    button {
+        padding: 18px 50px;
+        background: #0066ff;
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 20px;
+        cursor: pointer;
+        box-shadow: 0 6px 20px rgba(0,102,255,0.3);
+        transition: all 0.3s;
+    }
+    button:hover {
+        background: #0055cc;
+        transform: translateY(-3px);
+    }
+    button:disabled {
+        background: #999;
+        cursor: not-allowed;
+    }
+    .preview {
+        text-align: center;
+        margin: 40px 0;
+    }
+    .preview img {
+        max-width: 100%;
+        max-height: 70vh;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    .download-btn {
+        display: inline-block;
+        margin: 30px;
+        padding: 16px 40px;
+        background: #00c853;
+        color: white;
+        border-radius: 50px;
+        font-size: 20px;
+        text-decoration: none;
+        box-shadow: 0 6px 20px rgba(0,200,83,0.4);
+        transition: all 0.3s;
+    }
+    .download-btn:hover {
+        background: #00b140;
+        transform: translateY(-3px);
+    }
+    .tips {
+        background: #f0f8ff;
+        padding: 20px;
+        border-radius: 12px;
+        border-left: 5px solid #0066ff;
+        font-size: 15px;
+        color: #555;
+        margin-top: 40px;
+    }
+</style>
+
+<div class="upload-area">
+    <h2>上传图片，一键去除背景</h2>
+    <p>支持 PNG / JPG / WEBP / BMP / TIFF · 完全免费 · 无次数限制 · 原图质量</p>
+    <form id="upload-form" enctype="multipart/form-data">
+        <input type="file" name="image" accept="image/*" required>
+        <br>
+        <button type="submit" id="process-btn">开始去除背景</button>
+    </form>
+</div>
+
+<div class="preview" id="preview"></div>
+
+<div class="tips">
+    <strong>使用提示：</strong><br>
+    • 支持人像、商品、风景、LOGO 等各种图片<br>
+    • 去除背景后自动生成透明 PNG<br>
+    • 可直接用于小红书配图、淘宝主图、海报设计等<br>
+    • 处理时间 2–10 秒（首次模型加载稍慢）
+</div>
+
+<script>
+document.getElementById('upload-form').onsubmit = async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('process-btn');
+    btn.disabled = true;
+    btn.textContent = 'AI 处理中...';
+
+    const formData = new FormData(e.target);
+    const preview = document.getElementById('preview');
+    preview.innerHTML = '<p style="text-align:center;color:#666;padding:60px;">AI 处理中，请稍等（首次较慢）...</p>';
+
+    const res = await fetch('/api/remove_bg', {
+        method: 'POST',
+        body: formData
+    });
+
+    if (res.ok) {
+        const blob = await res.blob();
+        const url = URL.createObjectURL(blob);
+        const filename = res.headers.get('Content-Disposition')?.match(/filename="(.+)"/)?.[1] || 'transparent.png';
+
+        preview.innerHTML = `
+            <img src="${url}" alt="去背景结果">
+            <br><br>
+            <a href="${url}" download="${filename}" class="download-btn">
+                一键下载透明 PNG
+            </a>`;
+    } else {
+        const data = await res.json();
+        preview.innerHTML = `<p style="color:red;text-align:center;">${data.error || '处理失败，请重试'}</p>`;
+    }
+
+    btn.disabled = false;
+    btn.textContent = '开始去除背景';
+};
+</script>
+{% endblock %}
